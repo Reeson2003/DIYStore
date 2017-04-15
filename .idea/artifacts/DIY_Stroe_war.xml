@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DIY-Stroe:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="DIY-Store.war">
+      <element id="artifact" artifact-name="DIY-Stroe:war exploded" />
+    </root>
+  </artifact>
+</component>
