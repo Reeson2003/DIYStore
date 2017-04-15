@@ -12,7 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Created by reeson on 15.04.17.
+ * Date 15.04.17.
+ * @author Pavel Gavrilov
  */
 public class MainTest {
     public static void main(String[] args) {
