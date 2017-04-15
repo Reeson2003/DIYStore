@@ -10,26 +10,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * Date 15.04.17.
+ *
  * @author Pavel Gavrilov
  */
 public class MainTest {
     public static void main(String[] args) {
         JdbcDataSource dataSource = new JdbcDataSource();
-        String url = "jdbc:h2:./h2db";
-        String user = "admin";
-        String password = "12345678";
-        dataSource.setUrl(url);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
         try {
+            Properties dbProps = new Properties();
+            FileReader fileReader = new FileReader("h2database.properties");
+            //noinspection Since15
+            dbProps.load(fileReader);
+            fileReader.close();
+            String url = dbProps.getProperty("url");
+            String user = dbProps.getProperty("user");
+            String password = dbProps.getProperty("password");
+            dataSource.setUrl(url);
+            dataSource.setUser(user);
+            dataSource.setPassword(password);
+
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
             BufferedReader reader = new BufferedReader(new FileReader("query.sql"));
             StringBuilder sb = new StringBuilder();
-            while (true){
+            while (true) {
                 String s = reader.readLine();
                 if (s != null)
                     sb.append(s);
