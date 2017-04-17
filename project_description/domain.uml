@@ -2,12 +2,39 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes />
+  <nodes>
+    <node x="22.741935483870975" y="41.935483870967744">ru.reeson2003.diystore.model.domain.Product</node>
+    <node x="-199.76647966339402" y="191.3870967741936">ru.reeson2003.diystore.model.domain.Store</node>
+    <node x="81.97755960729319" y="221.96353436185132">ru.reeson2003.diystore.model.domain.Message</node>
+    <node x="-432.4964936886396" y="154.11360448807852">ru.reeson2003.diystore.model.domain.Artisan</node>
+  </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
-  <SelectedNodes />
-  <Categories />
+  <edges>
+    <edge source="ru.reeson2003.diystore.model.domain.Store" target="ru.reeson2003.diystore.model.domain.Message">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.reeson2003.diystore.model.domain.Artisan" target="ru.reeson2003.diystore.model.domain.Store">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.reeson2003.diystore.model.domain.Store" target="ru.reeson2003.diystore.model.domain.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.reeson2003.diystore.model.domain.Message" target="ru.reeson2003.diystore.model.domain.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9199999999999997" x="-146.02173913043464" y="201.3260869565218" />
+  <SelectedNodes>
+    <node>ru.reeson2003.diystore.model.domain.Artisan</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
 </Diagram>
 
