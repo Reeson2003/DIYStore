@@ -9,7 +9,6 @@ public class Artisan {
     private String storeName;
     private String email;
     private String password;
-    private Store store;
 
     public Artisan() {
     }
@@ -44,13 +43,5 @@ public class Artisan {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
     }
 }
