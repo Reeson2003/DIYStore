@@ -11,11 +11,11 @@ import java.util.List;
  * @author Pavel Gavrilov.
  */
 public interface ProductManager {
-    List<Product> getProducts(long artisanId);
+    List<Product> getProducts(Long artisanId) throws DataStorageException;
 
-    Product getProduct(long productId);
+    Product getProduct(Long productId) throws DataStorageException;
 
-    void setProduct(Product product);
+    void setProduct(Long artisanId, Product product) throws DataStorageException;
 
-    void deleteProduct(long productId);
+    void deleteProduct(Long productId) throws DataStorageException;
 }
