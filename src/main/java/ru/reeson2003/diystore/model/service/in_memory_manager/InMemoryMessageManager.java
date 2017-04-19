@@ -16,9 +16,8 @@ public class InMemoryMessageManager implements MessageManager {
     private GenericManager<Message> genericManager;
 
     public InMemoryMessageManager() {
-        genericManager = new GenericManager<Message>();
+        genericManager = new GenericManager<>();
     }
-
     public List<Message> getMessages(Long artisanId) throws DataStorageException {
         return genericManager.getItems(artisanId);
     }
@@ -33,5 +32,34 @@ public class InMemoryMessageManager implements MessageManager {
 
     public void deleteMessage(Long productId) throws DataStorageException {
         genericManager.deleteItem(productId);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Long key : genericManager.getContainer().keySet()) {
+            stringBuilder.append("\nProduct ID ");
+            stringBuilder.append("<");
+            stringBuilder.append(key);
+            stringBuilder.append(">");
+            stringBuilder.append("\n");
+            stringBuilder.append("All message: \n");
+            for (Long productId : genericManager.getContainer().get(key).keySet()) {
+                stringBuilder.append("           Message ID ");
+                stringBuilder.append("<");
+                stringBuilder.append(productId);
+                stringBuilder.append(">");
+                stringBuilder.append("\n");
+                stringBuilder.append("-----------------------------------\n");
+                Message productMessage = genericManager.getContainer().get(key).get(productId);
+                    stringBuilder.append("\"");
+                    stringBuilder.append(productMessage.getMessage());
+                    stringBuilder.append("\"");
+                    stringBuilder.append("\n");
+                    stringBuilder.append("-----------------------------------");
+                    stringBuilder.append("\n");
+                }
+            }
+            return String.valueOf(stringBuilder);
     }
 }
