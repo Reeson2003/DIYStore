@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean class="ru.reeson2003.diystore.model.SpringTestXmlConfig" name="springTest">
-        <property name="productManager" ref="inMemoryProductManager"/>
-        <!--<property name="productManager" ref="separator"/>-->
+        <!--<property name="productManager" ref="inMemoryProductManager"/>-->
+        <property name="productManager" ref="productsContainer"/>
         <property name="messageManager" ref="inMemoryMessageManager"/>
     </bean>
     <bean class="ru.reeson2003.diystore.model.service.in_memory_manager.InMemoryProductManager" name="inMemoryProductManager"/>
     <bean class="ru.reeson2003.diystore.model.service.in_memory_manager.InMemoryMessageManager" name="inMemoryMessageManager"/>
-    <bean class="ru.reeson2003.diystore.model.service.Separator" name="separator"/>
+    <bean class="ru.reeson2003.diystore.model.service.ProductsContainer" name="productsContainer"/>
 </beans>
