@@ -44,4 +44,14 @@ public class Artisan {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Artisan{" +
+                "id=" + id +
+                ", storeName='" + storeName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

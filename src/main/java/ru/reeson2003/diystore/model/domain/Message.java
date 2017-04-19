@@ -34,4 +34,13 @@ public class Message implements IdOwner{
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", product=" + product +
+                '}';
+    }
 }

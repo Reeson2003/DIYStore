@@ -10,4 +10,5 @@ public class DataStorageException extends Exception {
     public DataStorageException(Throwable throwable) {
         super(throwable);
     }
+    public DataStorageException(){}
 }
