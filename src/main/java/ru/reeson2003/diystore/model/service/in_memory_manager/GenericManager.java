@@ -15,21 +15,21 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 class GenericManager<T extends IdOwner> {
     private Map<Long, Map<Long, T>> container;
-    private AtomicLong idCreator;
+    private static AtomicLong idCreator;
 
     GenericManager() {
-        container = new ConcurrentHashMap<Long, Map<Long, T>>();
+        container = new ConcurrentHashMap<>();
         idCreator = new AtomicLong(0);
     }
 
     List<T> getItems(Long id) {
-        return new ArrayList<T>(container.get(id).values());
+        return new ArrayList<>(container.get(id).values());
     }
 
     T getItem(Long id) {
-        for (Map.Entry<Long, Map<Long, T>> pair: container.entrySet()) {
-            if (pair.getValue().containsKey(id))
-                return pair.getValue().get(id);
+        for (Map<Long, T> pair: container.values()) {
+            if (pair.containsKey(id))
+                return pair.get(id);
         }
         return null;
     }
@@ -39,14 +39,65 @@ class GenericManager<T extends IdOwner> {
             item.setId(idCreator.getAndIncrement());
         }
         if (!container.containsKey(id))
-            container.put(id, new HashMap<Long, T>());
+            container.put(id, new HashMap<>());
         container.get(id).put(item.getId(), item);
     }
 
     void deleteItem(Long id) {
-        for (Map.Entry<Long, Map<Long, T>> pair: container.entrySet()) {
-            if (pair.getValue().containsKey(id))
-                pair.getValue().remove(id);
+        for (Map<Long, T> pair: container.values()) {
+            if (pair.containsKey(id))
+                pair.remove(id);
         }
+    }
+
+    public Map<Long, Map<Long, T>> getContainer() {
+        return container;
+    }
+
+    public void setContainer(Map<Long, Map<Long, T>> container) {
+        this.container = container;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        int totalOfProducts = 0;
+        int totalOfArtisan = 0;
+        for (Long key : container.keySet()) {
+            stringBuilder.append("Artisan ID ");
+            stringBuilder.append("<");
+            stringBuilder.append(key);
+            stringBuilder.append(">");
+            stringBuilder.append("\n");
+            totalOfArtisan++;
+            int countProduct = 0;
+            for (Long productId : container.get(key).keySet()) {
+                countProduct++;
+                stringBuilder.append("    Name product - ");
+                stringBuilder.append(((Product)container.get(key).get(productId)).getName());
+                stringBuilder.append("\n");
+                stringBuilder.append("    ID product - ");
+                stringBuilder.append(productId);
+                stringBuilder.append("\n");
+                stringBuilder.append("    --------------------\n");
+            }
+            stringBuilder.append("Count product [");
+            stringBuilder.append(countProduct);
+            stringBuilder.append("]");
+            stringBuilder.append(" Artisan - ");
+            stringBuilder.append(key);
+            stringBuilder.append("\n");
+            totalOfProducts += countProduct;
+        }
+        stringBuilder.append("\n\n");
+        stringBuilder.append(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        stringBuilder.append("\n");
+        stringBuilder.append("Total Of Artisan - ");
+        stringBuilder.append(totalOfArtisan);
+        stringBuilder.append("\n");
+        stringBuilder.append("Total Of Products - ");
+        stringBuilder.append(totalOfProducts);
+        stringBuilder.append("\n");
+        stringBuilder.append("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        return String.valueOf(stringBuilder);
     }
 }
