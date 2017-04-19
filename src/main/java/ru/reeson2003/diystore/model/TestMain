@@ -1,0 +1,108 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+/**
+ * Created by myasnikov on 17.04.2017.
+ */
+public class TestMain {
+    public static void main(String[] args) throws DataStorageException {
+        Random rand = new Random();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        InMemoryProductManager inMemoryProductManager = new InMemoryProductManager();
+        InMemoryMessageManager inMemoryMessageManager = new InMemoryMessageManager();
+        long start = System.currentTimeMillis();
+        for (int k = 0; k < 3; k++) {
+            for (int j = 0; j < 3000; j++) {
+
+/**                Artisan partisan = Artisan.builder().email("mail@" + j + ".ru").id(j).password("password")
+                        .storeName("User - " + j).build(); */ //with builder
+
+                Artisan partisan = new Artisan();
+                partisan.setId(j);
+                partisan.setEmail("mail@" + j + ".ru");
+                partisan.setStoreName("User - " + j);
+                partisan.setPassword("password");
+
+                int ran = rand.nextInt(10);
+                for (int i = 0; i < ran; i++) {
+                    Product product = new Product();
+                    product.setName("Product № " + k +" " +j +" " +i);
+                    inMemoryProductManager.setProduct(partisan.getId(), product);
+                }
+            }
+        }
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println(inMemoryProductManager);
+        System.out.println("Time " +timeConsumedMillis +" ms");
+        String mess = "";
+        String iDProduct = "";
+        String iDArtisan = "";
+        Artisan partisan2 = Artisan.builder().email("mail@" + 777 + ".ru").id(1234).password("password")
+                .storeName("User - " + "###").build();
+        System.out.println("Enter message:");
+        try {
+            mess = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Enter ID Product");
+        try {
+            iDProduct = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        long pr = Integer.parseInt(iDProduct);
+        Product pro = inMemoryProductManager.getProduct(pr);
+        System.out.println(pro);
+        for (int i = 0; i < 3; i++) {
+            Message message = new Message(mess, pro, partisan2);
+            inMemoryMessageManager.setMessage(pro.getId(), message);
+        }
+        System.out.println(inMemoryMessageManager);
+        System.out.println("Enter artisan");
+        try {
+            iDArtisan = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        long ar = Integer.parseInt(iDArtisan);
+        for (Product pro1 : inMemoryProductManager.getProducts(ar)) {
+            System.out.println(pro1);
+        }
+
+
+/*        ProductManager productManager = new ProductsContainer();
+        ProductsContainer productManager1 = (ProductsContainer) productManager;
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < 1000; i++) {
+                Artisan partisan = Artisan.builder().email("email").id(i).password("password")
+                        .store(new Store()).storeName("name" + i).build();
+                Product product = new Product();
+                product.setName("Product " + i +" " +j);
+                try {
+                    productManager.setProduct(product, partisan.getId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        long finish = System.currentTimeMillis();
+        long timeConsumedMillis = finish - start;
+        System.out.println(productManager);
+        System.out.println(((ProductsContainer) productManager).size());
+        System.out.println("Time " +timeConsumedMillis +"мс");
+        for (int j = 0; j < 5000; j++) {
+            try {
+                productManager.deleteProduct((long)j);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(productManager);
+        System.out.println(((ProductsContainer) productManager).size());*/
+    }
+}
