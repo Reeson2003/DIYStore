@@ -22,7 +22,11 @@ class GenericManager<T extends IdOwner> {
         idCreator = new AtomicLong(0);
     }
 
-    List<T> getItems(Long id) {
+    List<T> getItems(Long id) throws DataStorageException {
+        if (container.isEmpty())
+            throw new DataStorageException(new Throwable("Empty container"));
+        if (container.get(id).isEmpty())
+            throw new DataStorageException(new Throwable("Empty list of " +id +" id"));
         return new ArrayList<>(container.get(id).values());
     }
 
@@ -43,11 +47,14 @@ class GenericManager<T extends IdOwner> {
         container.get(id).put(item.getId(), item);
     }
 
-    void deleteItem(Long id) {
+    void deleteItem(Long id) throws DataStorageException {
         for (Map<Long, T> pair: container.values()) {
-            if (pair.containsKey(id))
+            if (pair.containsKey(id)) {
                 pair.remove(id);
+                return;
+            }
         }
+        throw new DataStorageException(new Throwable());
     }
 
     public Map<Long, Map<Long, T>> getContainer() {
