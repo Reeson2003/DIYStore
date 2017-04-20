@@ -1,4 +1,4 @@
-package ru.reeson2003.diystore;
+package ru.reeson2003.diystore.model.samples;
 
 import org.h2.jdbcx.JdbcDataSource;
 
@@ -47,11 +47,7 @@ public class MainTest {
             statement.execute(sb.toString());
             statement.close();
             connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }

@@ -1,4 +1,4 @@
-package ru.reeson2003.diystore.model;
+package ru.reeson2003.diystore.model.samples;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -16,6 +16,7 @@ import java.util.List;
  * @author Pavel Gavrilov.
  */
 public class SpringTestXmlConfig {
+    private static String configPath = "src/main/webapp/WEB-INF/spring-test-xml-config.xml";
     private ProductManager productManager;
     private MessageManager messageManager;
 
@@ -36,9 +37,13 @@ public class SpringTestXmlConfig {
     }
 
     public static void main(String[] args) throws DataStorageException {
-        ApplicationContext fileSystemContext = new FileSystemXmlApplicationContext("src/main/webapp/WEB-INF/spring-test-xml-config.xml");
+        ApplicationContext fileSystemContext = new FileSystemXmlApplicationContext(configPath);
         SpringTestXmlConfig springTest = (SpringTestXmlConfig) fileSystemContext.getBean("springTest");
         ProductManager pm = springTest.getProductManager();
+        Class clazz = pm.getClass();
+        System.out.println(">>>> Class name: [" +
+                clazz.getName().substring(clazz.getPackage().getName().length() + 1) +
+                "]");
         Product socks = springTest.getProduct(100L, "Socks");
         Product shirt = springTest.getProduct(500L, "Shirt");
         Product someBeer = springTest.getProduct(350L, "SomeBeer");
@@ -60,8 +65,12 @@ public class SpringTestXmlConfig {
         }
     }
 
+    public void execute() {
+
+    }
+
     private Product getProduct(Long price, String description) {
-        Product result =  new Product();
+        Product result = new Product();
         result.setDescription(description);
         result.setPrice(price);
         return result;
