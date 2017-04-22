@@ -1,5 +1,7 @@
 package ru.reeson2003.diystore.model.service.in_memory_manager;
 
+import ru.reeson2003.diystore.model.service.DataStorageException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
