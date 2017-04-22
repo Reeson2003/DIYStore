@@ -17,8 +17,8 @@
 
     <!--=============================annotation configuration=================================-->
     <bean class="ru.reeson2003.diystore.model.samples.SpringAnnotationTest" name="springTest"/>
-    <!--<bean class="ru.reeson2003.diystore.model.service.in_memory_manager.InMemoryProductManager"/>-->
-    <bean class="ru.reeson2003.diystore.model.service.ProductsContainer"/>
+    <!--<bean class="ru.reeson2003.diystore.model.service.in_memory_manager.InMemoryProductManager" name="productManager"/>-->
+    <bean class="ru.reeson2003.diystore.model.service.ProductsContainer" name="productManager"/>
     <bean class="ru.reeson2003.diystore.model.service.in_memory_manager.InMemoryMessageManager"/>
     <!--=============================annotation configuration==================================-->
 </beans>
