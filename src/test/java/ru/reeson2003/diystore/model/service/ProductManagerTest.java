@@ -3,6 +3,7 @@ package ru.reeson2003.diystore.model.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import ru.reeson2003.diystore.model.domain.Product;
 
@@ -22,7 +23,7 @@ public class ProductManagerTest {
     @Before
     public void initTest() {
         ApplicationContext context =
-                new FileSystemXmlApplicationContext("src/main/webapp/WEB-INF/spring-test-xml-config.xml");
+                new FileSystemXmlApplicationContext("/src/main/webapp/WEB-INF/configs/spring_config.xml");
         manager = (ProductManager) context.getBean("productManager");
         Class clazz = manager.getClass();
         String name = clazz.getName().substring(clazz.getPackage().getName().length()+1);

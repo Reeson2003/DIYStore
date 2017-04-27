@@ -1,13 +1,11 @@
 package ru.reeson2003.diystore.model.domain;
 
 
-import ru.reeson2003.diystore.model.service.in_memory_manager.IdOwner;
-
 /**
  * Date: 15.04.17.
  * @author Pavel Gavrilov
  */
-public class Product implements IdOwner{
+public class Product{
     private Long id;
     private String description;
     private Long price;
