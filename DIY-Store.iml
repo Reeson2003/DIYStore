@@ -19,6 +19,7 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring-test-xml-config.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/configs/spring_config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring_config.xml</file>
         </fileset>
       </configuration>
     </facet>

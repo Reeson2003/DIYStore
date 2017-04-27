@@ -4,4 +4,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean class="ru.reeson2003.diystore.model.service.ProductManagerImpl" id="productManager"/>
     <bean class="ru.reeson2003.diystore.model.service.MessageManagerImpl" id="messageManager"/>
+    <bean class="ru.reeson2003.diystore.model.service.ArtisanManagerImpl" id="artisanManager"/>
 </beans>
