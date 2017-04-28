@@ -1,6 +1,7 @@
 package ru.reeson2003.diystore.model.service;
 
 import ru.reeson2003.diystore.model.domain.Product;
+import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
  * @author Pavel Gavrilov.
  */
 public interface ProductManager {
-    List<Product> getProducts(Long artisanId) throws DataStorageException;
+    List<Product> getAll(Long artisanId) throws DataStorageException;
 
-    Product getProduct(Long productId) throws DataStorageException;
+    Product getById(Long productId) throws DataStorageException;
 
-    void setProduct(Long artisanId, Product product) throws DataStorageException;
+    void set(Long artisanId, Product product) throws DataStorageException;
 
-    void deleteProduct(Long productId) throws DataStorageException;
+    void delete(Long productId) throws DataStorageException;
 }

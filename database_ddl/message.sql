@@ -1,0 +1,5 @@
+CREATE TABLE message (
+  id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+  message VARCHAR(256) NOT NULL ,
+  product_id BIGINT
+);

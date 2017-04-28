@@ -1,4 +1,4 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.service.exception;
 
 /**
  * Date: 18.04.2017.

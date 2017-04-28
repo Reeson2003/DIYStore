@@ -3,9 +3,9 @@ package ru.reeson2003.diystore.model.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import ru.reeson2003.diystore.model.domain.Product;
+import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
 import java.util.List;
 
@@ -35,14 +35,14 @@ public class ProductManagerTest {
         Product p = getProduct("My product", 100L);
         Long userId = 1L;
         try {
-            manager.setProduct(userId, p);
+            manager.set(userId, p);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Insert error");
         }
         List<Product> products = null;
         try {
-            products = manager.getProducts(userId);
+            products = manager.getAll(userId);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Get list error");
@@ -56,14 +56,14 @@ public class ProductManagerTest {
         long price = 555666444333L;
         Product pBefore = getProduct(desc, price);
         try {
-            manager.setProduct(1L, pBefore);
+            manager.set(1L, pBefore);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Insert error");
         }
         List<Product> products = null;
         try {
-            products = manager.getProducts(1L);
+            products = manager.getAll(1L);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Get list error");
@@ -77,14 +77,14 @@ public class ProductManagerTest {
         Product p = getProduct("My product", 100L);
         Long userId = 1L;
         try {
-            manager.setProduct(userId, p);
+            manager.set(userId, p);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Insert error");
         }
         List<Product> products = null;
         try {
-            products = manager.getProducts(userId);
+            products = manager.getAll(userId);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Get list error");
@@ -99,16 +99,16 @@ public class ProductManagerTest {
         Product p2 = getProduct("2-nd product", 200L);
         Product p3 = getProduct("3-rd product", 300L);
         try {
-            manager.setProduct(1L, p1);
-            manager.setProduct(1L, p2);
-            manager.setProduct(1L, p3);
+            manager.set(1L, p1);
+            manager.set(1L, p2);
+            manager.set(1L, p3);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Insert error");
         }
         List<Product> products = null;
         try {
-            products = manager.getProducts(1L);
+            products = manager.getAll(1L);
         } catch (DataStorageException e) {
             e.printStackTrace();
             fail("Get list error");
