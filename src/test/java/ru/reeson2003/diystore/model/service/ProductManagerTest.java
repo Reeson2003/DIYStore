@@ -23,7 +23,7 @@ public class ProductManagerTest {
     @Before
     public void initTest() {
         ApplicationContext context =
-                new FileSystemXmlApplicationContext("/src/main/webapp/WEB-INF/configs/spring_config.xml");
+                new FileSystemXmlApplicationContext("/src/main/resources/spring_config.xml");
         manager = (ProductManager) context.getBean("productManager");
         Class clazz = manager.getClass();
         String name = clazz.getName().substring(clazz.getPackage().getName().length()+1);
