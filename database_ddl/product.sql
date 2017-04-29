@@ -1,0 +1,5 @@
+CREATE TABLE users (
+  id        BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+  description VARCHAR(256) NOT NULL ,
+  price BIGINT NOT NULL
+);

@@ -16,7 +16,7 @@ public class ArtisanManagerTest {
     @Before
     public void initTest() {
         ApplicationContext context =
-                new FileSystemXmlApplicationContext("/src/main/webapp/WEB-INF/configs/spring_config.xml");
+                new FileSystemXmlApplicationContext("/src/main/resources/spring_config.xml");
         manager = (ArtisanManager) context.getBean("artisanManager");
         Class clazz = manager.getClass();
         String name = clazz.getName().substring(clazz.getPackage().getName().length()+1);

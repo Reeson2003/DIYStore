@@ -1,6 +1,7 @@
 package ru.reeson2003.diystore.model.service;
 
 import ru.reeson2003.diystore.model.domain.Message;
+import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
  * @author Pavel Gavrilov.
  */
 public interface MessageManager {
-    List<Message> getMessages(Long artisanId) throws DataStorageException;
+    List<Message> getAll(Long artisanId) throws DataStorageException;
 
-    Message getMessage(Long productId) throws DataStorageException;
+    Message getById(Long productId) throws DataStorageException;
 
-    void setMessage(Long artisanId, Message product) throws DataStorageException;
+    void set(Long artisanId, Message product) throws DataStorageException;
 
-    void deleteMessage(Long productId) throws DataStorageException;
+    void delete(Long productId) throws DataStorageException;
 }

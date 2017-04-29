@@ -5,8 +5,8 @@ package ru.reeson2003.diystore.model.domain;
  * @author Pavel Gavrilov
  */
 public class Artisan {
-    private long id;
-    private String storeName;
+    private Long id;
+    private String name;
     private String email;
     private String password;
 
@@ -21,12 +21,12 @@ public class Artisan {
         this.id = id;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public String getName() {
+        return name;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -49,7 +49,7 @@ public class Artisan {
     public String toString() {
         return "Artisan{" +
                 "id=" + id +
-                ", storeName='" + storeName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
