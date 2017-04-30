@@ -1,23 +1,48 @@
 package ru.reeson2003.diystore.model.domain;
 
+import javax.persistence.*;
+import java.util.List;
+
 /**
  * Date: 15.04.17.
  * @author Pavel Gavrilov
  */
+@Entity
+@Table(name = "artisan")
+@Access(AccessType.FIELD)
 public class Artisan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "arti_product",
+            joinColumns = @JoinColumn(name = "arti_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "arti_message",
+            joinColumns = @JoinColumn(name = "arti_id"),
+            inverseJoinColumns = @JoinColumn(name = "message_id")
+    )
+    private List<Message> messages;
 
     public Artisan() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,21 @@
 package ru.reeson2003.diystore.model.domain;
 
 
+import javax.persistence.*;
+
 /**
  * Date: 15.04.17.
  * @author Pavel Gavrilov
  */
+@Entity
+@Table(name = "product")
 public class Product{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "description")
     private String description;
+    @Column(name = "price")
     private Long price;
 
     public Long getId() {

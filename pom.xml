@@ -25,6 +25,13 @@
             <version>1.4.193</version>
         </dependency>
 
+        <!--hibernate-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.9.Final</version>
+        </dependency>
+
         <!--spring framework-->
         <dependency>
             <groupId>org.springframework</groupId>
