@@ -1,5 +1,7 @@
 package ru.reeson2003.diystore.model.service;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ru.reeson2003.diystore.model.domain.Message;
 import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
@@ -11,12 +13,7 @@ import java.util.List;
  *
  * @author Pavel Gavrilov.
  */
-public interface MessageManager {
-    List<Message> getAll(Long artisanId) throws DataStorageException;
+@Repository
+public interface MessageManager extends JpaRepository<Message, Long>{
 
-    Message getById(Long productId) throws DataStorageException;
-
-    void set(Long artisanId, Message product) throws DataStorageException;
-
-    void delete(Long productId) throws DataStorageException;
 }

@@ -1,5 +1,8 @@
 package ru.reeson2003.diystore.model.service;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import ru.reeson2003.diystore.model.domain.Artisan;
 import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
@@ -11,15 +14,7 @@ import java.util.List;
  *
  * @author Pavel Gavrilov.
  */
-public interface ArtisanManager {
+@Repository
+public interface ArtisanManager extends JpaRepository<Artisan, Long> {
 
-    void set(Artisan artisan) throws DataStorageException;
-
-    List<Artisan> getAll() throws DataStorageException;
-
-    Artisan getById(Long id) throws DataStorageException;
-
-    Artisan getByName(String name) throws DataStorageException;
-
-    Artisan getByEmail(String email) throws DataStorageException;
 }

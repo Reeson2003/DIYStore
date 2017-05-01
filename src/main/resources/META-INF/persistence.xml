@@ -1,0 +1,18 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+
+    <persistence-unit name="jpaData" transaction-type="RESOURCE_LOCAL">
+        <class>ru.reeson2003.diystore.model.domain.Artisan</class>
+        <class>ru.reeson2003.diystore.model.domain.Message</class>
+        <class>ru.reeson2003.diystore.model.domain.Product</class>
+        <properties>
+            <property name="driverClassName" value="org.h2.Driver"/>
+            <property name="url" value="jdbc:h2:./diy_store"/>
+            <property name="username" value="admin"/>
+            <property name="password" value="123"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
