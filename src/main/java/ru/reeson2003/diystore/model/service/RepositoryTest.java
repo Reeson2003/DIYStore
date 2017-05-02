@@ -56,7 +56,7 @@ public class RepositoryTest {
         artisanManager.save(baker);
         artisanManager.save(smith);
 
-        System.out.println(artisanManager.findOne(1L));
+        System.out.println(artisanManager.findByName("Tom Smith").getProducts());
     }
 
     private static Message getMessage(String msg) {
