@@ -1,4 +1,4 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.Examples;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;

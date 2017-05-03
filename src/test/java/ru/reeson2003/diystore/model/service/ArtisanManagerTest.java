@@ -2,20 +2,20 @@ package ru.reeson2003.diystore.model.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import ru.reeson2003.diystore.model.domain.Artisan;
 import ru.reeson2003.diystore.model.domain.Message;
 import ru.reeson2003.diystore.model.domain.Product;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static ru.reeson2003.diystore.model.service.EntityTestUtils.*;
 
 /**
  * Date: 27.04.2017.
@@ -35,15 +35,15 @@ public class ArtisanManagerTest {
     private static final String SHIRT_MESSAGE = "Buy shirt";
     private static final Logger logger = LogManager.getLogger("TEST");
     private Artisan artisan;
-    private ArtisanManager manager;
+    private static ArtisanManager manager;
 
     @BeforeClass
     public static void initClass() {
-        ArtisanManager manager =
-                new ClassPathXmlApplicationContext("spring_config.xml").
+        manager = new ClassPathXmlApplicationContext("spring_config.xml").
                         getBean(ArtisanManager.class);
-        logger.info("Initializing " +
+        logger.info("Initializing: " +
                 ArtisanManagerTest.class.getName());
+        logger.info("Testing class: " + manager.getClass().getName());
     }
 
     @Before
@@ -51,7 +51,6 @@ public class ArtisanManagerTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring_config.xml");
         manager = context.getBean(ArtisanManager.class);
-        logger.info(manager.getClass().getName());
         artisan = getArti(NAME, EMAIL, PASSWORD);
         Product socks = getProduct(SOCKS, SOCKS_PRICE);
         Product shirt = getProduct(SHIRT, SHIRT_PRICE);
@@ -64,30 +63,80 @@ public class ArtisanManagerTest {
     }
 
     @Test
-    public void findByNameTest() {
+    public void findOneByNameTest() {
+        logger.info("Testing method: " + methodName());
         manager.save(artisan);
         Artisan tmp = manager.findByName(NAME);
         assertEquals(tmp.getName(), NAME);
     }
 
-    private static Message getMessage(String msg) {
-        Message message = new Message();
-        message.setMessage(msg);
-        return message;
+    @Test
+    public void findAllByNameTest() {
+        logger.info("Testing method: " + methodName());
+        int number = 10;
+        for (int i = 0; i < number; i++) {
+            manager.save(getArti(NAME, EMAIL, PASSWORD));
+        }
+        List<Artisan> artisans = manager.findAllByName(NAME);
+        assertNotNull(artisans);
+        assertTrue(artisans.size() == number);
     }
 
-    private static Product getProduct(String desc, Long price) {
-        Product product = new Product();
-        product.setDescription(desc);
-        product.setPrice(price);
-        return product;
+    @Test
+    public void idGenerateTest() {
+        logger.info("Testing method: " + methodName());
+        assertNull(artisan.getId());
+        manager.save(artisan);
+        Artisan tmp = manager.findByName(NAME);
+        assertNotNull(tmp.getId());
     }
 
-    private static Artisan getArti(String name, String email, String pass) {
-        Artisan artisan = new Artisan();
-        artisan.setName(name);
-        artisan.setEmail(email);
-        artisan.setPassword(pass);
-        return artisan;
+    @Test
+    public void findByIdTest() {
+        logger.info("Testing method: " + methodName());
+        manager.save(artisan);
+        Artisan tmp = manager.findByName(NAME);
+        Long id = tmp.getId();
+        tmp = manager.findOne(id);
+        assertNotNull(tmp);
+        assertTrue(tmp.equals(artisan));
+    }
+
+    @Test
+    public void updateTest() {
+        logger.info("Testing method: " + methodName());
+        String name = "Marcus";
+        manager.save(artisan);
+        Artisan tmp = manager.findByName(NAME);
+        Long id = tmp.getId();
+        tmp.setName(name);
+        manager.save(tmp);
+        Artisan tmpNew = manager.findOne(id);
+        assertTrue(tmp.equals(tmpNew));
+    }
+
+    @Test
+    public void productsNotNullTest() {
+        logger.info("Testing method: " + methodName());
+        manager.save(artisan);
+        Artisan tmp = manager.findByName(NAME);
+        assertNotNull(tmp.getProducts());
+    }
+
+    @Test
+    public void messagesNotNullTest() {
+        logger.info("Testing method: " + methodName());
+        manager.save(artisan);
+        Artisan tmp = manager.findByName(NAME);
+        assertNotNull(tmp.getMessages());
+    }
+
+    private String methodName() {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            return stackTrace[1].getMethodName();
+        }
     }
 }

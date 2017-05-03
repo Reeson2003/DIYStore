@@ -1,12 +1,19 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.Examples;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.reeson2003.diystore.model.domain.Artisan;
 import ru.reeson2003.diystore.model.domain.Message;
 import ru.reeson2003.diystore.model.domain.Product;
+import ru.reeson2003.diystore.model.service.ArtisanManager;
+import ru.reeson2003.diystore.model.service.MessageManager;
+import ru.reeson2003.diystore.model.service.ProductManager;
 
 import java.util.Arrays;
+
+import static ru.reeson2003.diystore.model.service.EntityTestUtils.*;
 
 /**
  * Date: 01.05.2017.
@@ -15,6 +22,8 @@ import java.util.Arrays;
  * @author Pavel Gavrilov.
  */
 public class RepositoryTest {
+    private static Logger logger = LogManager.getLogger("TEST");
+
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring_config.xml");
 
@@ -56,27 +65,6 @@ public class RepositoryTest {
         artisanManager.save(baker);
         artisanManager.save(smith);
 
-        System.out.println(artisanManager.findByName("Tom Smith").getProducts());
-    }
-
-    private static Message getMessage(String msg) {
-        Message message = new Message();
-        message.setMessage(msg);
-        return message;
-    }
-
-    private static Product getProduct(String desc, Long price) {
-        Product product = new Product();
-        product.setDescription(desc);
-        product.setPrice(price);
-        return product;
-    }
-
-    private static Artisan getArti(String name, String email, String pass) {
-        Artisan artisan = new Artisan();
-        artisan.setName(name);
-        artisan.setEmail(email);
-        artisan.setPassword(pass);
-        return artisan;
+        logger.debug(artisanManager.findByName("Tom Smith").getProducts());
     }
 }

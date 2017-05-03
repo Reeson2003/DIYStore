@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Date: 15.04.17.
+ *
  * @author Pavel Gavrilov
  */
 @Entity
@@ -84,6 +85,48 @@ public class Artisan {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Artisan artisan = (Artisan) o;
+
+        if (id != null ? !id.equals(artisan.id) : artisan.id != null) return false;
+        if (name != null ? !name.equals(artisan.name) : artisan.name != null) return false;
+        if (email != null ? !email.equals(artisan.email) : artisan.email != null) return false;
+        if (password != null ? !password.equals(artisan.password) : artisan.password != null) return false;
+        if (products != null ? !productsEquals(artisan) : artisan.products != null) return false;
+        return messages != null ? messagesEquals(artisan) : artisan.messages == null;
+    }
+
+    private boolean productsEquals(Artisan artisan) {
+        if (products.size() != artisan.products.size()) return false;
+        for (int i = 0; i < products.size(); i++) {
+            if (!products.get(i).equals(artisan.products.get(i))) return false;
+        }
+        return true;
+    }
+
+    private boolean messagesEquals(Artisan artisan) {
+        if (messages.size() != artisan.messages.size()) return false;
+        for (int i = 0; i < messages.size(); i++) {
+            if(!messages.get(i).equals(artisan.messages.get(i))) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (products != null ? products.hashCode() : 0);
+        result = 31 * result + (messages != null ? messages.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -6,10 +6,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>
-        <logger name="TEST" level="debug">
+        <logger name="TEST" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
         </logger>
     </Loggers>

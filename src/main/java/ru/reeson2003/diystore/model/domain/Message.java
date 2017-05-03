@@ -43,6 +43,26 @@ public class Message{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message1 = (Message) o;
+
+        if (id != null ? !id.equals(message1.id) : message1.id != null) return false;
+        if (message != null ? !message.equals(message1.message) : message1.message != null) return false;
+        return product != null ? product.equals(message1.product) : message1.product == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Message{" +
                 "id=" + id +

@@ -17,4 +17,5 @@ import java.util.List;
 @Repository
 public interface ArtisanManager extends JpaRepository<Artisan, Long> {
     Artisan findByName(String name);
+    List<Artisan> findAllByName(String name);
 }
