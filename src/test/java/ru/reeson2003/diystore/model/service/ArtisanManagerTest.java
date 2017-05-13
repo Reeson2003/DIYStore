@@ -64,6 +64,11 @@ public class ArtisanManagerTest {
     }
 
     @Test
+    public void managerNotNull() {
+        assertNotNull(manager);
+    }
+
+    @Test
     public void findByUserNameTest() {
         logger.info("Testing method: " + methodName());
         manager.add(artisan);
