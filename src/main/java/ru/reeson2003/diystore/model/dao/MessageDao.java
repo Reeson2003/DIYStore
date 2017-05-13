@@ -1,15 +1,15 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.dao;
+
 
 import ru.reeson2003.diystore.model.domain.Message;
 
 /**
- * Date: 18.04.2017.
- * Time: 23:15.
+ * Date: 13.05.2017.
+ * Time: 9:07.
  *
  * @author Pavel Gavrilov.
  */
-
-public interface MessageManager{
+public interface MessageDao {
     void add(Message message);
 
     void update(Message message);

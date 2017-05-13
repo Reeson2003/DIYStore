@@ -1,13 +1,21 @@
 package ru.reeson2003.diystore.model.domain;
 
 
+import javax.persistence.*;
+
 /**
  * Date: 15.04.17.
  * @author Pavel Gavrilov
  */
+@Entity
+@Table(name = "message")
 public class Message{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "message")
     private String message;
+    @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
     public Long getId() {
@@ -32,6 +40,26 @@ public class Message{
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message1 = (Message) o;
+
+        if (id != null ? !id.equals(message1.id) : message1.id != null) return false;
+        if (message != null ? !message.equals(message1.message) : message1.message != null) return false;
+        return product != null ? product.equals(message1.product) : message1.product == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        return result;
     }
 
     @Override

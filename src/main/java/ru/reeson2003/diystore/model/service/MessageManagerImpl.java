@@ -1,34 +1,49 @@
 package ru.reeson2003.diystore.model.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.reeson2003.diystore.model.dao.MessageDao;
 import ru.reeson2003.diystore.model.domain.Message;
-import ru.reeson2003.diystore.model.service.exception.DataStorageException;
-
-import java.util.List;
 
 /**
- * Date: 27.04.2017.
- * Time: 22:41.
+ * Date: 13.05.2017.
+ * Time: 11:50.
  *
  * @author Pavel Gavrilov.
  */
-public class MessageManagerImpl implements MessageManager {
+public class MessageManagerImpl implements MessageManager{
+    private MessageDao messageDao;
+
     @Override
-    public List<Message> getAll(Long artisanId) throws DataStorageException {
-        return null;
+    public void add(Message message) {
+        messageDao.add(message);
     }
 
     @Override
-    public Message getById(Long productId) throws DataStorageException {
-        return null;
+    public void update(Message message) {
+        messageDao.update(message);
     }
 
     @Override
-    public void set(Long artisanId, Message product) throws DataStorageException {
-
+    public void remove(Message message) {
+        messageDao.remove(message);
     }
 
     @Override
-    public void delete(Long productId) throws DataStorageException {
+    public void remove(Long id) {
+        messageDao.remove(id);
+    }
 
+    @Override
+    public Message getById(Long id) {
+        return messageDao.getById(id);
+    }
+
+    public MessageDao getMessageDao() {
+        return messageDao;
+    }
+
+    @Autowired
+    public void setMessageDao(MessageDao messageDao) {
+        this.messageDao = messageDao;
     }
 }

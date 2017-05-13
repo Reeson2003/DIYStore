@@ -1,14 +1,14 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.dao;
 
 import ru.reeson2003.diystore.model.domain.Product;
 
 /**
- * Date: 18.04.2017.
- * Time: 7:55.
+ * Date: 13.05.2017.
+ * Time: 9:07.
  *
  * @author Pavel Gavrilov.
  */
-public interface ProductManager{
+public interface ProductDao {
     void add(Product product);
 
     void update(Product product);

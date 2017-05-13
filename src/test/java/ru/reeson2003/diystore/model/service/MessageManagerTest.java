@@ -1,25 +1,28 @@
 package ru.reeson2003.diystore.model.service;
 
-import org.junit.Before;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
- * Date: 27.04.2017.
- * Time: 22:42.
+ * Date: 13.05.2017.
+ * Time: 11:56.
  *
  * @author Pavel Gavrilov.
  */
 public class MessageManagerTest {
-    private MessageManager manager;
-    
-    @Before
-    void initTest() {
-        ApplicationContext context =
-                new FileSystemXmlApplicationContext("/src/main/resources/spring_config.xml");
-        manager = (MessageManager) context.getBean("messageManager");
-        Class clazz = manager.getClass();
-        String name = clazz.getName().substring(clazz.getPackage().getName().length()+1);
-        System.out.println(">>>Class name: " + name);
+    private static MessageManager manager;
+
+    @BeforeClass
+    public static void initClass() {
+        manager = new ClassPathXmlApplicationContext("spring_config.xml").
+                getBean(MessageManager.class);
+    }
+
+    @Test
+    public void managerNotNull() {
+        assertNotNull(manager);
     }
 }
