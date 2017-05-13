@@ -1,12 +1,10 @@
 package ru.reeson2003.diystore.model.service;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static org.junit.Assert.*;
-import static ru.reeson2003.diystore.model.service.EntityTestUtils.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Date: 13.05.2017.
@@ -15,16 +13,12 @@ import static ru.reeson2003.diystore.model.service.EntityTestUtils.*;
  * @author Pavel Gavrilov.
  */
 public class MessageManagerTest {
-    private MessageManager manager;
+    private static MessageManager manager;
 
-    @Before
-    public void initTest() {
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("spring_config.xml");
-        manager = context.getBean(MessageManager.class);
-        Class clazz = manager.getClass();
-        String name = clazz.getName().substring(clazz.getPackage().getName().length()+1);
-        System.out.println(">>>Class name: " + name);
+    @BeforeClass
+    public static void initClass() {
+        manager = new ClassPathXmlApplicationContext("spring_config.xml").
+                getBean(MessageManager.class);
     }
 
     @Test

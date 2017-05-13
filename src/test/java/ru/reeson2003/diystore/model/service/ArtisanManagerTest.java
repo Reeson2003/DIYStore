@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.reeson2003.diystore.model.domain.Artisan;
 import ru.reeson2003.diystore.model.domain.Message;
@@ -49,9 +48,6 @@ public class ArtisanManagerTest {
 
     @Before
     public void initTest() {
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("spring_config.xml");
-        manager = context.getBean(ArtisanManager.class);
         artisan = getArti(NAME, EMAIL, PASSWORD);
         Product socks = getProduct(SOCKS, SOCKS_PRICE);
         Product shirt = getProduct(SHIRT, SHIRT_PRICE);
