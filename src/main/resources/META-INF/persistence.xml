@@ -5,6 +5,7 @@
 
     <persistence-unit name="jpaData" transaction-type="RESOURCE_LOCAL">
         <class>ru.reeson2003.diystore.model.domain.Artisan</class>
+        <class>ru.reeson2003.diystore.model.domain.ArtisanParams</class>
         <class>ru.reeson2003.diystore.model.domain.Message</class>
         <class>ru.reeson2003.diystore.model.domain.Product</class>
         <properties>

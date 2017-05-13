@@ -26,7 +26,7 @@ public class EntityTestUtils {
 
     public static Artisan getArti(String name, String email, String pass) {
         Artisan artisan = new Artisan();
-        artisan.setName(name);
+        artisan.setUserName(name);
         artisan.setEmail(email);
         artisan.setPassword(pass);
         return artisan;

@@ -61,10 +61,10 @@ public class RepositoryTest {
         smith.setProducts(Arrays.asList(spoon, fork));
         smith.setMessages(Arrays.asList(buySpoon, buyFork));
 
-        artisanManager.save(tailor);
-        artisanManager.save(baker);
-        artisanManager.save(smith);
+        artisanManager.add(tailor);
+        artisanManager.add(baker);
+        artisanManager.add(smith);
 
-        logger.debug(artisanManager.findByName("Tom Smith").getProducts());
+        logger.debug(artisanManager.getByUserName("Tom Smith").getProducts());
     }
 }

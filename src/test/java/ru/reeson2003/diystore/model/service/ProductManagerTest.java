@@ -18,6 +18,31 @@ import static org.junit.Assert.*;
  * @author Pavel Gavrilov.
  */
 public class ProductManagerTest {
+    @Test
+    public void add() throws Exception {
+
+    }
+
+    @Test
+    public void update() throws Exception {
+
+    }
+
+    @Test
+    public void remove() throws Exception {
+
+    }
+
+    @Test
+    public void remove1() throws Exception {
+
+    }
+
+    @Test
+    public void getById() throws Exception {
+
+    }
+
     private ProductManager manager;
 
     @Before

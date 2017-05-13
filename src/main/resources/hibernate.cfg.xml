@@ -14,6 +14,7 @@
 
         <!-- List of XML mapping files -->
         <mapping class="ru.reeson2003.diystore.model.domain.Artisan"/>
+        <mapping class="ru.reeson2003.diystore.model.domain.ArtisanParams"/>
         <mapping class="ru.reeson2003.diystore.model.domain.Product"/>
         <mapping class="ru.reeson2003.diystore.model.domain.Message"/>
 

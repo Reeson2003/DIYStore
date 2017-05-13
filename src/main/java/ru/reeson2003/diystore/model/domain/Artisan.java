@@ -15,12 +15,14 @@ public class Artisan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "email")
+    @Column(name = "user_name", unique = true, nullable = false)
+    private String userName;
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+    @OneToOne(cascade = CascadeType.ALL)
+    private ArtisanParams artisanParams;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "arti_product",
@@ -47,12 +49,12 @@ public class Artisan {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.userName = name;
     }
 
     public String getEmail() {
@@ -69,6 +71,14 @@ public class Artisan {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArtisanParams getArtisanParams() {
+        return artisanParams;
+    }
+
+    public void setArtisanParams(ArtisanParams artisanParams) {
+        this.artisanParams = artisanParams;
     }
 
     public List<Product> getProducts() {
@@ -95,7 +105,7 @@ public class Artisan {
         Artisan artisan = (Artisan) o;
 
         if (id != null ? !id.equals(artisan.id) : artisan.id != null) return false;
-        if (name != null ? !name.equals(artisan.name) : artisan.name != null) return false;
+        if (userName != null ? !userName.equals(artisan.userName) : artisan.userName != null) return false;
         if (email != null ? !email.equals(artisan.email) : artisan.email != null) return false;
         if (password != null ? !password.equals(artisan.password) : artisan.password != null) return false;
         if (products != null ? !productsEquals(artisan) : artisan.products != null) return false;
@@ -121,7 +131,7 @@ public class Artisan {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (products != null ? products.hashCode() : 0);
@@ -133,7 +143,7 @@ public class Artisan {
     public String toString() {
         return "Artisan{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

@@ -1,21 +1,17 @@
-package ru.reeson2003.diystore.model.service;
+package ru.reeson2003.diystore.model.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import ru.reeson2003.diystore.model.domain.Artisan;
-import ru.reeson2003.diystore.model.service.exception.DataStorageException;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * Date: 27.04.2017.
- * Time: 22:55.
+ * Date: 13.05.2017.
+ * Time: 9:07.
  *
  * @author Pavel Gavrilov.
  */
-public interface ArtisanManager {
+public interface ArtisanDao {
     void add(Artisan artisan);
 
     void update(Artisan artisan);
