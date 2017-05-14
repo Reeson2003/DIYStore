@@ -31,4 +31,22 @@ public class EntityTestUtils {
         artisan.setPassword(pass);
         return artisan;
     }
+
+    static String methodName() {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            return stackTrace[1].getMethodName();
+        }
+    }
+
+    static String className() {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            return stackTrace[1].getClassName();
+        }
+    }
 }

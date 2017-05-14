@@ -3,7 +3,6 @@ package ru.reeson2003.diystore.model.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,19 +34,12 @@ public class ArtisanManagerTest {
     private static final String SHIRT_MESSAGE = "Buy shirt";
     private static final Logger logger = LogManager.getLogger("TEST");
     private Artisan artisan;
-    private static ArtisanManager manager;
-
-    @BeforeClass
-    public static void initClass() {
-        manager = new ClassPathXmlApplicationContext("spring_config.xml").
-                        getBean(ArtisanManager.class);
-        logger.info("Initializing: " +
-                ArtisanManagerTest.class.getName());
-        logger.info("Testing class: " + manager.getClass().getName());
-    }
+    private ArtisanManager manager;
 
     @Before
     public void initTest() {
+        manager = new ClassPathXmlApplicationContext("spring_config.xml").
+                getBean(ArtisanManager.class);
         artisan = getArti(NAME, EMAIL, PASSWORD);
         Product socks = getProduct(SOCKS, SOCKS_PRICE);
         Product shirt = getProduct(SHIRT, SHIRT_PRICE);
@@ -61,12 +53,13 @@ public class ArtisanManagerTest {
 
     @Test
     public void managerNotNull() {
+        logger.info("Testing method: " + className() +"." + methodName());
         assertNotNull(manager);
     }
 
     @Test
     public void findByUserNameTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
         assertEquals(tmp.getUserName(), NAME);
@@ -75,7 +68,7 @@ public class ArtisanManagerTest {
     @Test
     @Ignore
     public void findAllByFirstNameTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         int number = 10;
         for (int i = 0; i < number; i++) {
             manager.add(getArti(NAME, EMAIL, PASSWORD));
@@ -87,7 +80,7 @@ public class ArtisanManagerTest {
 
     @Test
     public void idGenerateTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         assertNull(artisan.getId());
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
@@ -96,7 +89,7 @@ public class ArtisanManagerTest {
 
     @Test
     public void findByIdTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
         Long id = tmp.getId();
@@ -107,7 +100,7 @@ public class ArtisanManagerTest {
 
     @Test
     public void updateTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         String name = "Marcus";
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
@@ -120,7 +113,7 @@ public class ArtisanManagerTest {
 
     @Test
     public void productsNotNullTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
         assertNotNull(tmp.getProducts());
@@ -128,18 +121,9 @@ public class ArtisanManagerTest {
 
     @Test
     public void messagesNotNullTest() {
-        logger.info("Testing method: " + methodName());
+        logger.info("Testing method: " + className() +"." + methodName());
         manager.add(artisan);
         Artisan tmp = manager.getByUserName(NAME);
         assertNotNull(tmp.getMessages());
-    }
-
-    private String methodName() {
-        try {
-            throw new Exception();
-        } catch (Exception e) {
-            StackTraceElement[] stackTrace = e.getStackTrace();
-            return stackTrace[1].getMethodName();
-        }
     }
 }
