@@ -41,6 +41,12 @@ public class Artisan {
     public Artisan() {
     }
 
+    public Artisan(String userName, String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

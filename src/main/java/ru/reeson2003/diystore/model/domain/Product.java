@@ -18,6 +18,14 @@ public class Product{
     @Column(name = "price")
     private Long price;
 
+    public Product() {
+    }
+
+    public Product(String description, Long price) {
+        this.description = description;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

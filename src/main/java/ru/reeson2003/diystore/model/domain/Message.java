@@ -18,6 +18,13 @@ public class Message{
     @OneToOne(cascade = CascadeType.ALL)
     private Product product;
 
+    public Message() {
+    }
+
+    public Message(String message) {
+        this.message = message;
+    }
+
     public Long getId() {
         return id;
     }
