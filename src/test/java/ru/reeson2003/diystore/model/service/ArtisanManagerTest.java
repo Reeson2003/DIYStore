@@ -58,11 +58,15 @@ public class ArtisanManagerTest {
     }
 
     @Test
-    public void findByUserNameTest() {
+    public void findUserByNameTest() {
         logger.info("Testing method: " + className() +"." + methodName());
-        manager.add(artisan);
-        Artisan tmp = manager.getByUserName(NAME);
-        assertEquals(tmp.getUserName(), NAME);
+        String expectedName = "Vasya";
+        Artisan expectedArtisan = new Artisan(expectedName, "www", "13");
+        manager.add(expectedArtisan);
+        Artisan resultingArtisan = manager.getByUserName(expectedName);
+        String resultingName = resultingArtisan.getUserName();
+        assertTrue(expectedName.equals(resultingName) ||
+                    expectedArtisan.equals(resultingArtisan));
     }
 
     @Test
