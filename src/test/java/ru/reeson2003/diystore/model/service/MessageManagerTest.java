@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import ru.reeson2003.diystore.model.dao.MessageDao;
+import ru.reeson2003.diystore.model.dao.spring_jpa_dao.MessageJpaDao;
 import ru.reeson2003.diystore.model.domain.Message;
 
 import static org.junit.Assert.*;
@@ -125,8 +126,10 @@ public class MessageManagerTest {
     }
 
     @Test
-    public void removeTestOnIdInvalid() {
+    public void removeTestOnIdInvalidNegative() {
         logger.info("Testing method: " + className() +"." + methodName());
+        Long idNegative = -13163L;
+        assertNotNull(manager.getById(idNegative));
     }
 
     @Test
@@ -218,7 +221,12 @@ public class MessageManagerTest {
     @Test
     public void setMessageDao() {
         logger.info("Testing method: " + className() +"." + methodName());
-
+        String expectedString = "Simple test set message DAO";
+        Message expectedMessage = getMessage(expectedString);
+        MessageDao expectedMessageDao = new MessageJpaDao();
+        manager.add(expectedMessage);
+        expectedMessageDao.update(expectedMessage);
+        MessageDao resultingMessageDao = ((MessageManagerImpl)manager).getMessageDao();
+        assertTrue(expectedMessageDao.equals(resultingMessageDao));
     }
-
 }
