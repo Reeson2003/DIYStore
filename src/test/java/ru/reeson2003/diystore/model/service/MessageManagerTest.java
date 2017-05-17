@@ -16,8 +16,7 @@ import static ru.reeson2003.diystore.model.service.EntityTestUtils.methodName;
  *
  * @author Pavel Gavrilov.
  */
-public class MessageManagerTest {
-    private static final Logger logger = LogManager.getLogger("TEST");
+public class MessageManagerTest {private static final Logger logger = LogManager.getLogger("TEST");
     private MessageManager manager;
 
     @Before
@@ -31,4 +30,190 @@ public class MessageManagerTest {
         logger.info("Testing method: " + className() +"." + methodName());
         assertNotNull(manager);
     }
+
+    @Test
+    public void managerAddMessageSimpleTest() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test add message";
+        Message expectedMessage = getMessage(expectedString);
+        manager.add(expectedMessage);
+        Message resultingMessage = manager.getById(expectedMessage.getId());
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void managerAddMessageDefault() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        manager.add(expectedMessage);
+        Message resultingMessage = manager.getById(expectedMessage.getId());
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void managerAddMessageNull() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = null;
+        try {
+            manager.add(expectedMessage);
+            fail();
+        } catch (InvalidDataAccessApiUsageException ignored) {}
+    }
+    @Test
+    public void removeTestOnMessageSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test remove message by obj";
+        Message expectedMessage = getMessage(expectedString);
+        Long idExpectedMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        manager.remove(expectedMessage);
+        assertNull(manager.getById(idExpectedMessage));
+    }
+
+    @Test
+    public void removeTestOnMessageDefault() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        Long idExpectedMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        manager.remove(expectedMessage);
+        assertNull(manager.getById(idExpectedMessage));
+    }
+
+    @Test
+    public void removeTestOnMessageNull() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = null;
+        try {
+            manager.remove(expectedMessage);
+            fail();
+        } catch (InvalidDataAccessApiUsageException ignored) {}
+    }
+
+    @Test
+    public void removeTestOnIdSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test remove message by Id";
+        Message expectedMessage = getMessage(expectedString);
+        Long idExpectedMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        manager.remove(idExpectedMessage);
+        assertNull(manager.getById(idExpectedMessage));
+    }
+
+    @Test
+    public void removeTestOnIdDefault() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        Long idExpectedMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        manager.remove(idExpectedMessage);
+        assertNull(manager.getById(idExpectedMessage));
+    }
+
+    @Test
+    public void removeTestOnIdInvalid() {
+        logger.info("Testing method: " + className() +"." + methodName());
+    }
+
+    @Test
+    public void removeTestOnIdNull() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Long expectedId = null;
+        try {
+            manager.remove(expectedId);
+            fail();
+        } catch (InvalidDataAccessApiUsageException ignored) {}
+    }
+    @Test
+    public void getTestByIdSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test get message by id";
+        Message expectedMessage = getMessage(expectedString);
+        Long idExpectedMessage;
+        Message resultingMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        resultingMessage = manager.getById(idExpectedMessage);
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void getTestByIdDefault() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        Long idExpectedMessage;
+        Message resultingMessage;
+
+        manager.add(expectedMessage);
+        idExpectedMessage = expectedMessage.getId();
+        resultingMessage = manager.getById(idExpectedMessage);
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void getTestByIdBeforeSetId() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        Long idExpectedMessage = 345698L;
+        Message resultingMessage;
+        expectedMessage.setId(idExpectedMessage);
+
+        manager.add(expectedMessage);
+        resultingMessage = manager.getById(idExpectedMessage);
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void getTestByIdAfterSetId() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Message expectedMessage = new Message();
+        Long idExpectedMessage = 345698L;
+        Message resultingMessage;
+
+        manager.add(expectedMessage);
+        expectedMessage.setId(idExpectedMessage);
+        resultingMessage = manager.getById(idExpectedMessage);
+        assertTrue(expectedMessage.equals(resultingMessage));
+    }
+
+    @Test
+    public void getTestByIdNull() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        Long expectedId = null;
+        try {
+            manager.remove(expectedId);
+            fail();
+        } catch (InvalidDataAccessApiUsageException ignored) {}
+    }
+
+    @Test
+    public void getTestMessageDaoSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test get message DAO";
+        Message expectedMessage = getMessage(expectedString);
+
+        manager.add(expectedMessage);
+        MessageDao messageDao = null;
+        if (manager instanceof MessageManagerImpl) {
+            messageDao = ((MessageManagerImpl)manager).getMessageDao();
+        }
+        assertNotNull(messageDao);
+    }
+
+    @Test
+    public void setMessageDao() {
+        logger.info("Testing method: " + className() +"." + methodName());
+
+    }
+
 }
