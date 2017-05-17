@@ -55,14 +55,11 @@ public class ProductManagerTest {
         assertTrue(expectedProduct.equals(resultingProduct));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void managerAddProductNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Product expectedProduct = null;
-        try {
-            manager.add(expectedProduct);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.add(expectedProduct);
     }
     @Test
     public void removeTestOnProductSimple() {
@@ -90,14 +87,11 @@ public class ProductManagerTest {
         assertNull(manager.getById(idExpectedProduct));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void removeTestOnProductNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Product expectedProduct = null;
-        try {
-            manager.remove(expectedProduct);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedProduct);
     }
 
     @Test
@@ -133,14 +127,11 @@ public class ProductManagerTest {
         assertNotNull(manager.getById(idNegative));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void removeTestOnIdNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Long expectedId = null;
-        try {
-            manager.remove(expectedId);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedId);
     }
     @Test
     public void getTestByIdSimple() {
@@ -196,14 +187,11 @@ public class ProductManagerTest {
         assertTrue(expectedProduct.equals(resultingProduct));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void getTestByIdNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Long expectedId = null;
-        try {
-            manager.remove(expectedId);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedId);
     }
 
     @Test
@@ -232,5 +220,26 @@ public class ProductManagerTest {
         expectedProductDao.update(expectedProduct);
         ProductDao resultingProductDao = ((ProductManagerImpl)manager).getProductDao();
         assertTrue(expectedProductDao.equals(resultingProductDao));
+    }
+
+    @Test
+    public void setPriceTestSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test set product price";
+        Long expectedPrice = 12345L;
+        Long initialPrice = 54321L;
+        Product expectedProduct = getProduct(expectedString, initialPrice);
+        expectedProduct.setPrice(expectedPrice);
+        assertTrue(expectedPrice.equals(expectedProduct.getPrice()));
+    }
+
+    @Test
+    public void getDescriptionTestSimple() {
+        logger.info("Testing method: " + className() +"." + methodName());
+        String expectedString = "Simple test set product description";
+        Long initialPrice = 54321L;
+        Product expectedProduct = getProduct(expectedString, initialPrice);
+        String resultString = expectedProduct.getDescription();
+        assertEquals(expectedString, resultString);
     }
 }

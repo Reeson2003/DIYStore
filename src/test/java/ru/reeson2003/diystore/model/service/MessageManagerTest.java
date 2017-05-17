@@ -56,14 +56,11 @@ public class MessageManagerTest {
         assertTrue(expectedMessage.equals(resultingMessage));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void managerAddMessageNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Message expectedMessage = null;
-        try {
-            manager.add(expectedMessage);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.add(expectedMessage);
     }
     @Test
     public void removeTestOnMessageSimple() {
@@ -90,14 +87,11 @@ public class MessageManagerTest {
         assertNull(manager.getById(idExpectedMessage));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void removeTestOnMessageNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Message expectedMessage = null;
-        try {
-            manager.remove(expectedMessage);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedMessage);
     }
 
     @Test
@@ -118,7 +112,6 @@ public class MessageManagerTest {
         logger.info("Testing method: " + className() +"." + methodName());
         Message expectedMessage = new Message();
         Long idExpectedMessage;
-
         manager.add(expectedMessage);
         idExpectedMessage = expectedMessage.getId();
         manager.remove(idExpectedMessage);
@@ -132,14 +125,11 @@ public class MessageManagerTest {
         assertNotNull(manager.getById(idNegative));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void removeTestOnIdNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Long expectedId = null;
-        try {
-            manager.remove(expectedId);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedId);
     }
     @Test
     public void getTestByIdSimple() {
@@ -194,14 +184,11 @@ public class MessageManagerTest {
         assertTrue(expectedMessage.equals(resultingMessage));
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void getTestByIdNull() {
         logger.info("Testing method: " + className() +"." + methodName());
         Long expectedId = null;
-        try {
-            manager.remove(expectedId);
-            fail();
-        } catch (InvalidDataAccessApiUsageException ignored) {}
+        manager.remove(expectedId);
     }
 
     @Test
