@@ -80,7 +80,6 @@ public class MessageManagerTest {
         logger.info("Testing method: " + className() +"." + methodName());
         Message expectedMessage = new Message();
         Long idExpectedMessage;
-
         manager.add(expectedMessage);
         idExpectedMessage = expectedMessage.getId();
         manager.remove(expectedMessage);
